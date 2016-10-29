@@ -226,7 +226,7 @@ gulp.task('browsersync', function() {
 
     browserSync.init(files, {
 	    // Replace with URL of your local site
-	    proxy: "http://local.zurb/",
+	    proxy: "http://local.staging/",
 		// Don't show any notifications in the browser.
         notify: false,
 		//browser: ["Google Chrome", "FireFox", "Safari"]

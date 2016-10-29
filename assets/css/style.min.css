@@ -7979,7 +7979,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .no-effect .componentGallery .tint:hover figure img,
 .no-effect .imageGallery .tint:hover figure img,
 .no-effect .vimeo-youtube-video-gallery .tint:hover figure img {
-  -webkit-filter: blur(0px) grayscale(0) opacity(1);
   filter: blur(0px) grayscale(0) opacity(1); }
 
 .no-effect .componentGallery .tint:hover figure figcaption:hover,
@@ -8042,7 +8041,6 @@ figcaption p {
     opacity: .2;
     background-size: 60%; }
   .tint:hover figure img {
-    -webkit-filter: blur(5px) grayscale(1) opacity(1);
     filter: blur(5px) grayscale(1) opacity(1); }
   .tint .icon-play {
     background: url("../svg/play-circle-white.svg") center center no-repeat;
@@ -8244,7 +8242,6 @@ figure.effect-oscar figcaption {
 
 figure.effect-oscar figcaption:hover {
   background: none;
-  -webkit-filter: inherit;
   filter: inherit; }
 
 figure.effect-oscar figcaption::before {
@@ -9239,7 +9236,6 @@ to display none.
     background: transparent !important;
     color: black !important;
     text-shadow: none !important;
-    -webkit-filter: none !important;
     filter: none !important;
     -ms-filter: none !important; }
   a, a:visited {
