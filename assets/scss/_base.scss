@@ -1,0 +1,2339 @@
+/*-------------------------------------------------------------------------------------------*/
+/* BASE */
+/*-------------------------------------------------------------------------------------------*/
+
+// Style used when top-bar has the show/hide function applied
+// Prevents top-bar from being covered up by admin bar when logged in
+body.admin-bar .nav-container .top-bar {
+	margin-top: 32px; //Height of WP Admin Bar
+}
+@include breakpoint(medium down) {
+	body.admin-bar .nav-container .top-bar {
+		margin-top: 46px; //Height of WP Admin Bar (Medium Down)
+	}
+}
+
+
+body {
+	height: auto; //  Sticky Footer! Works only when body height is auto, not 100%.
+	font-family: $font-stack;
+	//color: $bodyColor;
+  p {
+	  font-size: 1rem;
+  }
+}
+
+strong {
+	font-family: $font-stack-bold;
+	font-weight: normal !important;
+}
+
+// Removes blue outline around links
+a {
+   outline: 0;
+}
+
+hr {
+	border-bottom: 10px solid $lightgray;
+}
+
+li {
+	list-style-position: inside;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
+
+img.alignleft {
+	margin-right: 1.5em;
+	display: inline;
+	float: left;
+}
+img.alignright {
+	margin-left: 1.5em;
+	display: inline;
+	float: right;
+}
+
+img.aligncenter {
+	margin-right: auto;
+	margin-left: auto;
+	display: block;
+	clear: both;
+}
+img.alignleft,
+img.alignright,
+img.aligncenter {
+	margin-bottom: 1.5em;
+}
+
+/*You can also use Foundations class: .clearfix */
+/* Clear floats */
+.group:before,
+.group:after 	{content: "\0020"; display: block; height: 0; overflow: hidden;}
+.group:after 	{clear: both;}
+.group 			{zoom: 1;}  /* For IE 6/7 (trigger hasLayout) */
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* TYPOGRAPHY */
+/*-------------------------------------------------------------------------------------------*/
+
+
+h1, h2, h3, h4, h5 {
+	font-family: $font-stack-light;
+	line-height: 1.2;
+	letter-spacing: -1px;
+	color: $green;
+	em {
+		font-family: $font-stack-light-itc;
+		strong {
+			font-family: $font-stack-bold-itc;
+		}
+	}
+	strong {
+		font-family: $font-stack-bold;
+		em {
+			font-family: $font-stack-bold-itc;
+		}
+	}
+
+}
+p {
+	// Body content set in body tag above
+	em {
+		font-family: $font-stack-regular-itc;
+		//color: purple;
+	}
+}
+
+
+@include breakpoint(medium down) {
+	h1, h2, h3, h4, h5 {
+		font-size: 2rem;
+	}
+}
+
+/*-------------------------------------------------------------------------------------------*/
+/* MISC */
+/*-------------------------------------------------------------------------------------------*/
+
+.sticky { /* Add_styles */ }
+
+.bypostauthor { /* Add_styles */ }
+
+
+.top-bar li.menu-text a {
+	padding: 0; // Fixes aligment issue when .top-bar site-name is a link
+	font-family: $font-stack-bold;
+	font-weight: normal;
+}
+
+
+
+
+.off-canvas-wrapper { // Fixes reveal issues on mobile with custom jquery code in custom-fucntions.php in inactive
+    //-webkit-overflow-scrolling: auto;
+}
+
+.js-off-canvas-exit.is-visible {
+	z-index: 10000; // Places off-canvas trigger above everything
+	background: rgba(255, 255, 255, .5); // Controls overlay color when active
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* BUTTONS */
+/*-------------------------------------------------------------------------------------------*/
+
+// Button styling
+// Depending on how they apply the custom button style in the editor (add link / apply or apply / add lilnk)
+.button.radius {
+	border-radius: .25rem;
+}
+
+.button {
+	&.outline {
+		border: 4px solid $green;
+		background-color: white;
+		color: $green;
+		text-transform: uppercase;
+		font-family: $font-stack-extrabold;
+		font-size: 1.25rem;
+		padding: 0.85em 1.5em;
+		a {
+			color: $green;
+		}
+		&:hover {
+			background-color: $green;
+			border: 4px solid #efefef;
+			color: white;
+			a {
+				color: white;
+			}
+		}
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* NAVIGATION: CUSTOM   */
+/*-------------------------------------------------------------------------------------------*/
+
+ /* !Menu show/hide on scroll
+===============================================================================*/
+
+.is-off-canvas-open .top-bar {
+	position: inherit;
+}
+
+.top-bar {
+    height: auto;
+	position: fixed;
+    top: 0;
+    z-index: 200;
+    transition: top 0.2s ease-in-out;
+    width: 100%;
+}
+.nav-up {
+    top: -$nav-height; //negitive (-) in front of var
+}
+
+
+ /* MENU
+===============================================================================*/
+
+// Fixes Foundation off-canvas menu styling to avoid menu link stacking under logo
+.top-bar-left,
+.top-bar-right {
+	width: auto !important;
+}
+
+// Style Top-Bar
+.top-bar {
+	//background: rgba(255,  0,  0, 0.39);
+	//background: rgba(255, 255, 255, 0.90);
+	background: rgba(0, 0, 0, 0.8);
+	padding: $nav-spacing / 2;
+}
+
+// Makes room for custom off-canvas menu
+.top-bar-right ul.menu {
+	float: left;
+}
+
+.custom-logo {
+	left: 0;
+	position: absolute;
+	height: $nav-height;
+	display: table;
+	img {
+		height: $nav-height;
+		max-height: $nav-height;
+		width: auto;
+		padding: 10px;
+	}
+	a {
+		display: block;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	h4 {
+		font-size: 1rem;
+		margin-top: 10px;
+	}
+}
+
+.nav-container {
+	height: $nav-height;
+	margin-bottom: $nav-spacing;
+	&.center {
+		.nav-table {
+			.nav-custom {
+				float: none;
+			}
+		}
+	}
+	.nav-align-container {
+		position: relative;
+		max-width: 75rem;  // Sets width to standard 1200px. Comment out for 100%
+		margin-left: auto;
+		margin-right: auto;
+	}
+	&.full-width {
+		.nav-align-container {
+			max-width: 100%;
+			margin: 0;
+			//background: red;
+		}
+	}
+	.nav-table {
+		display: table;
+		.nav-custom {
+			display: table;
+			height: $nav-height;
+			margin: 0 auto;
+			float: right;
+		}
+		.nav-cell {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}
+
+@include breakpoint(medium down) {
+	.nav-align-container {
+		display: table-row;
+		position:static;
+		.nav-custom.center {
+			display: inline-block;
+			height: $nav-height;
+		}
+	}
+}
+
+
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* TEMPLATE-ID */
+/*-------------------------------------------------------------------------------------------*/
+
+.template-id {
+	width: 100%;
+	background: DeepPink;
+	color: white;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+	position: relative;
+	z-index: 20;
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* FOOTER */
+/*-------------------------------------------------------------------------------------------*/
+
+footer {
+	//background: red;
+	//padding: 20px;
+	//text-align: center;
+	//border-top: 1px solid $lightgray;
+	font-size: 0.8125rem;
+	color: black;
+	.footer-logo {
+		height: 50px;
+		width: auto;
+	}
+	&.footer {
+		margin-top: 0; // overrides '_main' .footer class style
+	}
+	.copyright {
+		text-align: center;
+		padding-top: 20px;
+		font-family: $font-stack;
+		padding-left: 0.9375rem;
+		padding-right: 0.9375rem;
+		p {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			font-size: .85rem;
+		}
+		.source-org {
+			font-size: .85rem;
+			padding-bottom: 20px;
+			p {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* IMAGE GALLERY STYLES */
+/*-------------------------------------------------------------------------------------------*/
+
+[class*="gallery-columns-"] {
+  display: block;
+  padding: 0;
+  margin: 0 -0.625rem; }
+
+[class*="gallery-columns-"]:before, [class*="gallery-columns-"]:after {
+  content: " ";
+  display: table; }
+
+[class*="gallery-columns-"]:after {
+  clear: both; }
+
+[class*="gallery-columns-"] > .gallery-item {
+  display: inline;
+  height: auto;
+  float: left;
+  text-align: center;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-1 > .gallery-item {
+  width: 100%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-1 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-1 > .gallery-item:nth-of-type(1n+1) {
+  clear: both; }
+
+.gallery-columns-2 > .gallery-item {
+  width: 50%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-2 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-2 > .gallery-item:nth-of-type(2n+1) {
+  clear: both; }
+
+.gallery-columns-3 > .gallery-item {
+  width: 33.33333%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-3 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-3 > .gallery-item:nth-of-type(3n+1) {
+  clear: both; }
+
+.gallery-columns-4 > .gallery-item {
+  width: 25%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-4 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-4 > .gallery-item:nth-of-type(4n+1) {
+  clear: both; }
+
+.gallery-columns-5 > .gallery-item {
+  width: 20%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-5 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-5 > .gallery-item:nth-of-type(5n+1) {
+  clear: both; }
+
+.gallery-columns-6 > .gallery-item {
+  width: 16.66667%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-6 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-6 > .gallery-item:nth-of-type(6n+1) {
+  clear: both; }
+
+.gallery-columns-7 > .gallery-item {
+  width: 14.28571%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-7 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-7 > .gallery-item:nth-of-type(7n+1) {
+  clear: both; }
+
+.gallery-columns-8 > .gallery-item {
+  width: 12.5%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-8 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-8 > .gallery-item:nth-of-type(8n+1) {
+  clear: both; }
+
+.gallery-columns-9 > .gallery-item {
+  width: 11.11111%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-9 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-9 > .gallery-item:nth-of-type(9n+1) {
+  clear: both; }
+
+.gallery-columns-10 > .gallery-item {
+  width: 10%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-10 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-10 > .gallery-item:nth-of-type(10n+1) {
+  clear: both; }
+
+.gallery-columns-11 > .gallery-item {
+  width: 9.09091%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-11 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-11 > .gallery-item:nth-of-type(11n+1) {
+  clear: both; }
+
+.gallery-columns-12 > .gallery-item {
+  width: 8.33333%;
+  padding: 0 0.625rem 1.25rem; }
+
+.gallery-columns-12 > .gallery-item:nth-of-type(n) {
+  clear: none; }
+
+.gallery-columns-12 > .gallery-item:nth-of-type(12n+1) {
+  clear: both; }
+
+/* A gallery image caption */
+.gallery .gallery-caption {
+  color: #888;
+  line-height: 1.4;
+  font-size:  0.75rem;
+  margin: 0 0 12px;
+  padding-top: 10px; }
+
+/* The actual image inside a container
+for 3, 2 and 4 column galleries */
+.gallery img {
+	//box-shadow: 0px 0px 4px #999;
+	border: 1px solid #DDD;
+	&:hover {
+		//background: white;
+		//border: 1px solid red;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* PAGINATION */
+/*-------------------------------------------------------------------------------------------*/
+
+/* No Space Buttons */
+ul.pagination,
+ul.page-pagination {
+	display: inline-block;
+	min-height: 2.5rem;
+	border-radius: 0.25em;
+	border: 1px solid #e6e6e6;
+	padding: 0 !important;
+	margin-left: 0;
+	 li {
+		height: 2.5rem;
+		color: #222222;
+		font-size: 1rem;
+		margin: 0!important;
+		&:last-of-type a {
+			border: 1px solid transparent;
+			border-radius: 0 0.25em 0.25em 0;
+		}
+		&:first-of-type a {
+			border-radius: 0.25em 0 0 0.25em;
+		}
+		&:hover a {
+			color: #FFF;
+		}
+	}
+}
+ul.pagination li a,
+ul.pagination li button,
+ul.page-pagination li a,
+ul.page-pagination li button {
+	border-right: 1px solid #e6e6e6;
+	min-height: 2.5rem;
+	display: block;
+	padding: .4rem 1rem;
+	color: #999999;
+	background: none;
+	border-radius: 0;
+	font-weight: normal;
+	//font-size: 1.5em;
+	//line-height: inherit;
+	transition: background-color 300ms ease-out;
+	line-height: 1.6;
+}
+ul.pagination li:hover a,
+ul.pagination li a:focus, ul.pagination li:hover button,
+ul.pagination li button:focus,
+ul.page-pagination li:hover a,
+ul.page-pagination li a:focus, ul.pagination li:hover button,
+ul.page-pagination li button:focus {
+  background: deepskyblue;
+  border-right: 1px solid transparent;
+}
+ul.pagination li.unavailable a,
+ul.pagination li.unavailable button,
+ul.page-pagination li.unavailable a,
+ul.page-pagination li.unavailable button {
+  cursor: default;
+  color: #999999;
+}
+ul.pagination li.unavailable:hover a,
+ul.pagination li.unavailable a:focus,
+ul.pagination li.unavailable:hover button,
+ul.pagination li.unavailable button:focus,
+ul.page-pagination li.unavailable:hover a,
+ul.page-pagination li.unavailable a:focus,
+ul.page-pagination li.unavailable:hover button,
+ul.page-pagination li.unavailable button:focus  {
+  background: transparent;
+}
+ul.pagination li.current,
+ul.pagination li.current button,
+ul.page-pagination li.current,
+ul.page-pagination li.current button {
+  border: 1px solid transparent;
+  background: $blue;
+  color: #FFFFFF;
+  font-weight: bold;
+  cursor: default;
+  padding: .3rem 1rem;
+  //line-height: 1.6;
+  //min-height: 2.5rem;
+}
+ul.pagination li.current:nth-last-child(-0n+2),
+ul.page-pagination li.current:nth-last-child(-0n+2) {
+	border-radius: 0 0.20em 0.20em 0;
+}
+ul.pagination li.current:nth-child(2),
+ul.page-pagination li.current:nth-child(2) {
+	border-radius: 0.20em 0 0 0.20em;
+}
+ul.pagination li.current:hover,
+ul.pagination li.current:focus,
+ul.pagination li.current button:hover,
+ul.pagination li.current button:focus,
+ul.page-pagination li.current:hover,
+ul.page-pagination li.current:focus,
+ul.page-pagination li.current button:hover,
+ul.page-pagination li.current button:focus {
+	background: $blue;
+}
+ul.pagination li,
+ul.page-pagination li  {
+	float: left;
+	display: block;
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* TABS: Custom deep linking tabs animation using animation (variables):   */
+/*-------------------------------------------------------------------------------------------*/
+
+// Used for custom deep linking tabs
+.tab-container {
+	ul.tabs {
+		border: 1px solid #e6e6e6;
+		li {
+			a {
+				float: left;
+				&:hover {
+					background: #f0f0f0;
+				}
+				&.is-active,[aria-selected='true'] {
+					background: #e6e6e6;
+				}
+				&.tab {
+					padding: 1.25rem 1.5rem;
+					line-height: 1;
+					font-size: 12px;
+					color: #2199e8;
+				}
+			}
+		}
+	} // end .tabs
+} // end .tab-container
+
+section[aria-hidden='false'] {
+	display: none;
+	opacity: 0;
+}
+section[aria-hidden='false'] {
+	display: block;
+	-webkit-animation: fadeIn .4s;
+	animation: fadeIn .4s;
+	opacity: 1;
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* SVG */
+/*-------------------------------------------------------------------------------------------*/
+
+svg {
+	//background: red;
+	//width: auto;
+	width: 100px;
+	height: 100px;
+}
+svg.pin {
+	height: 35px;
+	width: 35px;
+}
+svg.facebook {
+	height: 35px;
+	width: 35px;
+}
+svg #pin path {
+	fill:deepskyblue;
+}
+li.facebook {
+	font-size: 1rem;
+}
+li.facebook svg {
+	height: 20px;
+	width: 20px;
+	margin-right: 10px;
+    display:table-cell;
+    vertical-align : middle;
+    display: inline-block;
+}
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* VIDEO GALLERY */
+/*-------------------------------------------------------------------------------------------*/
+
+.video-gallery-content {
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+}
+
+/*-------------------------------------------------------------------------------------------*/
+/* LIGHT GALLERY */
+/*-------------------------------------------------------------------------------------------*/
+
+// Removes scroll bars in fullscreen mode
+body.lg-on {
+	overflow: hidden;
+}
+
+
+// Prevents false lightbox module empty area clicked
+// Center align light gallery and video thuumnails
+.light-gallery,
+.light-gallery ul,
+#video-gallery {
+	display: inline-block;
+	text-align: center;
+}
+
+//Customize Light Gallery Styles
+.light-gallery {
+	width: 100%;
+	> ul {
+		margin-bottom: 0;
+		list-style: none;
+		> li {
+			float: left;
+			margin-bottom: 15px;
+			margin-right: 20px;
+			width: 200px;
+			&:last-of-type {
+				margin-right: 0;
+			}
+			a {
+				border: 3px solid #FFF;
+				border-radius: 3px;
+				display: block;
+				overflow: hidden;
+				position: relative;
+				float: left;
+				> img {
+					transition: transform 0.15s ease 0s;
+					transform: scale3d(1, 1, 1);
+					height: 100%;
+					width: 100%;
+				}
+				&:hover {
+					> img {
+						transform: scale3d(1.1, 1.1, 1.1);
+					}
+					&:hover .demo-gallery-poster {
+						background-color: rgba(0, 0, 0, 0.5);
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* CUSTOM OFF-CANVAS MENU */
+/*-------------------------------------------------------------------------------------------*/
+
+$color-background: #F5F5F5;
+$color-main: #FF5252;
+$color-active: #FFF;
+$color-link: #FFF;
+
+$button-height: 27px;
+$button-width: 35px;
+
+body.overlay-scroll {
+	overflow: hidden;
+}
+.overlay.open {
+	overflow-y: auto;
+}
+.container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 40%;
+    left: 0;
+    margin: 0 auto;
+    p {
+        font-size: 20px;
+    }
+    a {
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        color: $color-main;
+        text-decoration: none;
+        font-size: 20px;
+        overflow: hidden;
+        top: 5px;
+        &:after {
+            content: '';
+            position: absolute;
+            background: $color-main;
+            height: 2px;
+            width: 0%;
+            transform: translateX(-50%);
+            left: 50%;
+            bottom: 0;
+            transition: .35s ease;
+        }
+        &:hover:after,
+        &:focus:after,
+        &:active:after {
+            width: 100%;
+        }
+    }
+}
+.button_container {
+	display: inline-block;
+    position: relative;
+    //position: fixed; // uncomment to fix position menu
+    //top: 1%; // uncomment if fixed
+    //right: 2%; // uncomment if fixed
+    height: $button-height;
+    width: $button-width;
+    cursor: pointer;
+    z-index: 1000;
+    transition: opacity .25s ease;
+    margin: 4px 10px 0 10px;
+    &:hover {
+        opacity: .7;
+    }
+    &.active-menu {
+	    margin: 4px 30px 0 10px;
+        .top {
+            transform: translateY(11px) translateX(0) rotate(45deg);
+            background: $color-active;
+        }
+        .middle {
+            opacity: 0;
+            background: $color-active;
+        }
+        .bottom {
+            transform: translateY(-11px) translateX(0) rotate(-45deg);
+            background: $color-active;
+        }
+    }
+    span {
+        background: $color-main;
+        border: none;
+        height: 5px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all .35s ease;
+        cursor: pointer;
+        &:nth-of-type(2) {
+            top: 11px;
+        }
+        &:nth-of-type(3) {
+            top: 22px;
+        }
+    }
+}
+.overlay {
+    position: fixed;
+    background: $color-main;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    opacity: 0;
+    visibility: hidden;
+    //transition: opacity .35s, visibility .35s, height .35s; // animate height
+    transition: opacity .35s, visibility .35s; //Don't animate height
+    overflow: auto;
+    z-index: 100;
+    &.open {
+        opacity: .9;
+        visibility: visible;
+        height: 100%;
+		li {
+			animation: fadeIn .5s ease forwards;
+			animation-delay: .35s;
+				@for $i from 1 through 100 {
+				&:nth-of-type(#{$i}) {
+					animation-delay:$i * .10s;
+				}
+			}
+		}
+    }
+    nav {
+        position: relative;
+        height: 70%;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 50px;
+        font-weight: 400;
+        text-align: center;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 auto;
+        display: inline-block;
+        position: relative;
+        height: 100%;
+        background: transparent;
+        li {
+            display: block;
+            height: 10%;
+            height: calc(100% / 8);
+            min-height: 50px;
+            position: relative;
+            opacity: 0;
+            a {
+                display: block;
+                position: relative;
+                color: $color-link;
+                text-decoration: none;
+                overflow: hidden;
+                &:hover:after, &:focus:after, &:active:after {
+                    width: 100%;
+                }
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: 0%;
+                    transform: translateX(-50%);
+                    height: 3px;
+                    background: $color-link;
+                    transition: .35s;
+                }
+            }
+        }
+    }
+}
+
+// Controls animation direction and opacity
+@keyframes fadeInNav {
+  0% {
+    opacity: 0;
+    bottom: -20%;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0;
+  }
+}
+
+
+
+// Small Screen - Mobile Media Query
+// Controls different spacing for mobile menu item
+@media only screen and (max-width: 32em) {
+	.overlay {
+		ul {
+			li {
+				height: calc(100% / 5);
+			}
+		}
+	}
+}
+
+
+
+
+
+
+/*
+.overlay-menu {
+	.menu.medium-horizontal > li {
+		display: block;
+	}
+	.dropdown.menu .is-dropdown-submenu-parent.is-right-arrow>a::after {
+		border: none;
+	}
+}
+*/
+
+
+
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* LIGHTGALLERY */
+/*-------------------------------------------------------------------------------------------*/
+
+.lightGallery {
+	//position: relative;
+	> ul {
+		display: inline-block;
+		margin-left: 0;
+		list-style-type: none;
+		> li {
+			position: relative;
+			float: left;
+			margin-bottom: 15px;
+			margin-right: 20px;
+			//display: none; // Hide list items with images
+			a {
+				border: 3px solid #FFF;
+				border-radius: 3px;
+				display: block;
+				overflow: hidden;
+				//position: relative;
+				float: left;
+				background: #111;
+				> img {
+					transform: scale3d(1, 1, 1);
+					transition: transform 0.15s ease 0s;
+				} //img
+				&:hover {
+					> img {
+						transform: scale3d(1.2, 1.2, 1.2);
+						opacity: .5;
+					} // :hover img
+				} // :hover
+			} // a
+			.demo-gallery-poster {
+				position: absolute;
+				display: block;
+				top:50%;
+				left: 50%;
+				margin-left: -15px;
+				margin-top: -15px;
+				transition: opacity .5s ease 0s;
+				opacity: 0;
+				pointer-events: none;
+			}
+			&:hover .demo-gallery-poster {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* SASS: TABLE ALIGNMENT (NEEDS MIXINS.SCSS SNIPPET) */
+/*-------------------------------------------------------------------------------------------*/
+
+
+
+.align-container {
+	position: relative;
+	//background: #f06d06;
+	//xbackground-color: rgba(255, 0, 0, 0.5) !important;
+	width: 50%;
+	//height: 200px;
+	// margin: 20px auto;
+}
+
+.align {
+	//background: white;
+	//padding: 20px;
+	width: 100%;
+	text-align: center;
+	&.both {
+		@include center(both);
+	}
+
+	&.top {
+		@include center(top);
+	}
+
+	&.right {
+		@include center(right);
+	}
+
+	&.bottom {
+		@include center(bottom);
+	}
+
+	&.left {
+		@include center(left);
+	}
+}
+
+
+
+
+.parent {
+  position: relative;
+  background: #f06d06;
+  //background-color: rgba(255, 0, 0, 0.5) !important;
+  width: 100%;
+  height: 200px;
+  //margin: 20px auto;
+}
+
+.child {
+  background: white;
+  padding: 20px;
+
+  &.both {
+    @include center(both);
+  }
+
+  &.top {
+    @include center(top);
+  }
+
+  &.right {
+    @include center(right);
+  }
+
+  &.bottom {
+    @include center(bottom);
+  }
+
+  &.left {
+    @include center(left);
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* HEADLINES */
+/*-------------------------------------------------------------------------------------------*/
+
+.headlines {
+	text-align: center;
+	h1 {
+		font-family: $font-stack-bold;
+	}
+	p {
+		font-size: 1.5rem;
+		font-family: $font-stack-light;
+	}
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* CUSTOM TABS: Custom deep linking tabs animation using animation (variables):   */
+/*-------------------------------------------------------------------------------------------*/
+
+// Used for custom deep linking tabs
+.custom-tabs.tab-container {
+	ul.tabs {
+		border: none;
+		//border-bottom: 1px solid #e6e6e6;
+		line-height: 0;
+		text-align: center;
+		li {
+			display: inline-block;
+			&:first-child a {
+				border-left: 1px solid white;
+				border-top-left-radius: 10px;
+			}
+			&:last-child a {
+				border-top-right-radius: 10px;
+			}
+			a {
+				float: left;
+				border-right: 1px solid white;
+				&:hover {
+					background: #f0f0f0;
+				}
+				&.tab {
+					padding: 1.25rem 1.5rem;
+					line-height: 1;
+					font-size: 1.5rem;
+					font-family: $font-stack-bold;
+					color: white;
+					background-color: $lightgray;
+					&.is-active,[aria-selected='true'] {
+						background: $blue;
+					}
+				}
+			}
+		}
+	} // end .tabs
+	section[aria-hidden='false'] {
+		display: none;
+		opacity: 0;
+	}
+	section[aria-hidden='false'] {
+		display: block;
+		animation: fadeIn .4s;
+		opacity: 1;
+	}
+} // end .tab-container
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* MODULES */
+/*-------------------------------------------------------------------------------------------*/
+
+.module-section {
+	//margin-bottom: 30px;
+	//padding: 20px;
+}
+
+.module-background {
+	//min-height: $module-height;
+	width: 100%;
+	//background-position: center top;
+	background-size: cover;
+	background-position: center top;
+}
+.module-wrapper {
+	//background: rgba(0, 0, 0, 0.2) !important;
+	//background: rgba(68, 132, 251, 0.8) !important;
+	height: 100%;
+	//min-height: 100px;
+	h2 {
+		margin-bottom: 0;
+		font-size: 2rem;
+		line-height: 1;
+		text-transform: uppercase;
+		font-family: $font-stack-bold;
+		//height: 45px;
+		//background-color: rgba(248, 150, 30, 0.8);
+		color: white;
+	}
+}
+
+
+
+.section-table-wrapper {
+	table,
+	table tbody,
+	table tbody th,
+	table tbody tr,
+	table tbody td {
+		padding: 0;
+		margin: 0;
+		border: none;
+		background-color: transparent;
+	}
+	tr {
+		height: 100%;
+	}
+}
+@include breakpoint(medium down) {
+
+	.section-table-wrapper {
+		table tbody th,
+		table tbody td {
+			padding: 0;
+			height: 100% !important;
+
+		}
+	}
+	.section-header-component {
+		height: 100% !important;
+		min-height: 100% !important;
+		padding: 0 !important;
+		td div {
+			width: 100% !important;
+		}
+	}
+	.align.both {
+		position:inherit;
+		top:inherit;
+		left: auto;
+		transform: inherit;
+		width: 100% !important;
+	}
+}
+
+
+
+.section-container {
+	background: orange;
+	margin-bottom: 20px;
+}
+.section-description {
+	 background: fuchsia;
+}
+
+.header-container {
+	margin-bottom: 40px
+}
+.header-none,
+.header-section,
+.header-featured {
+	text-align: center;
+	//padding: 20px;
+}
+.header-none {
+	//background: white;
+}
+.header-section {
+	//background: fuchsia;
+}
+.header-featured {
+	//background-color: blue;
+	//background-image: url("../images/compass-work-background.png");
+	background-repeat: no-repeat;
+	background-position: center top;
+	//min-height: 400px;
+	background-size: cover;
+	//color: white;
+}
+
+.gallery-container {
+	text-align: center;
+}
+
+
+
+
+.block-container {
+	/* Center elements*/
+	text-align: center !important;
+	/* Removes natural margin to element causing grid to break */
+	font-size: 0;
+}
+/*
+.block-container > a {
+ 	display: inline-block !important;
+    float:none !important;
+    text-align:center !important;
+    vertical-align: top;
+    font-size: 1rem;
+    background: rgba(0, 255, 163, 0.91);
+    padding: 20px;
+}
+*/
+.block-container a {
+    //background: rgba(0, 255, 163, 0.65);
+	display: block;
+	height: auto;
+	width: 100%;
+	cursor: pointer;
+	padding: 0;
+	text-align: left;
+}
+.block-container .gallery-item-link {
+    //background: rgba(0, 255, 163, 0.8);
+    float:none !important;
+    display: inline-block !important;
+    //cursor: pointer;
+    vertical-align: top;
+    font-size: 1rem;
+    //padding: .5rem .25rem;
+    //padding: 1rem;
+	//padding: 0;
+}
+
+.gallery-item-link.component-wrapper {
+    //background: rgba(0, 255, 163, 0.8);
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@include breakpoint(medium only) {
+	.header-section {
+		h1, h1 span {
+			//color: purple !important;
+			font-size: 4rem !important;
+		}
+		h2, h2 span {
+			//color: purple;
+			font-size: 2.5rem !important;
+		}
+		h3, h3 span {
+			//color: purple !important;
+			font-size: 2.5rem !important;
+		}
+		p {
+			//color: purple;
+			font-size: 1.125rem;
+			//padding: 20px 0 0;
+		}
+		.gallery-container {
+			.gallery-section {
+				margin-bottom: 0;
+				width: 180px;
+			}
+		}
+	}
+	.header-featured {
+		h1, h1 span {
+			font-size: 4rem !important;
+			margin-bottom: 20px;
+		}
+		.gallery-container {
+			margin-top: 10px;
+			.gallery-section {
+				width: 250px;
+			}
+		}
+	}
+}
+
+
+@include breakpoint(small only) {
+	.header-section {
+		h1, h1 span {
+			//color: red !important;
+			font-size: 3.875rem !important;
+			line-height: 1.2;
+			margin-bottom: 20px;
+		}
+		h2, h2 span {
+			//color: red;
+			font-size: 2rem !important;
+		}
+		h3, h3 span {
+			//color: red !important;
+			font-size: 1.875rem !important;
+		}
+		p {
+			//color: red;
+			font-size: 1rem;
+			//padding: 20px 0 0;
+		}
+		.gallery-container {
+			.gallery-section {
+				//float: left;
+				width: 100%;
+				//width: 150px;
+				//width: 225px;
+				margin-bottom: 10px;
+				img[src$=".svg"] {
+					height: auto !important;
+					width: 160px !important;
+				}
+				img,
+				img[src$=".svg"] {
+					width: 160px;
+					height: auto;
+				}
+				button {
+					//color: purple;
+					font-size: 1.25rem;
+					padding: 10px 15px;
+				}
+			}
+			.gallery-list {
+				background-color: $lightgray;
+				border: 2px solid darken($lightgray, 10%);
+				border-radius: 10px;
+			}
+		}
+		hr {
+			display: none;
+		}
+	}
+	.header-featured {
+		background-color: $blue;
+		background-repeat: repeat;
+		background-size: contain;
+		border-radius: 5px;
+		//margin: 0 20px;
+		h1, h1 span {
+			font-size: 4rem !important;
+			margin-bottom: 20px;
+		}
+		.gallery-container {
+			.gallery-section {
+				width: 100%;
+				background-color: darken($blue, 10%);
+				border-radius: 5px;
+				p {
+					color: white;
+				}
+			}
+		}
+	}
+}
+
+/*-------------------------------------------------------------------------------------------*/
+/* COMPONENTS   */
+/*-------------------------------------------------------------------------------------------*/
+
+.component-link {
+	border: 10px solid blue;
+	display: block;
+}
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* REVEAL:   */
+/*-------------------------------------------------------------------------------------------*/
+
+.reveal {
+	//font-family: $font-stack;
+	h2 {
+		margin-top: 40px;
+		font-family: $font-stack-bold;
+	}
+	.read-more {
+		color: white;
+		display: inline-block;
+	}
+	$border-size: 2px;
+	$border-style: solid;
+/*
+	a[href$=".pdf"] {
+		background-image: url("../svg/pdfs-hover.svg");
+		background-color: #CB0606;
+		border: $border-size $border-style #CB0606;
+		&:hover {
+			background-image: url("../svg/pdfs.svg");
+			background-color: white;
+		}
+	}
+	a[href$=".ppt"],
+	a[href$=".pptx"] {
+		background-image: url("../svg/ppts-hover.svg");
+		border: $border-size $border-style #e28500;
+		background-color: #e28500;
+		&:hover {
+			background-image: url("../svg/ppts.svg");
+			background-color: white;
+		}
+	}
+	a[href$=".doc"],
+	a[href$=".docx"] {
+		background-image: url("../svg/docs-hover.svg");
+		border: $border-size $border-style #067FCB;
+		background-color: #067FCB;
+		&:hover {
+			background-image: url("../svg/docs.svg");
+			background-color: white;
+		}
+	}
+	a[href$=".zip"] {
+		background-image: url("../svg/zips-hover.svg");
+		border: $border-size $border-style #435055;
+		background-color: #435055;
+		&:hover {
+			background-image: url("../svg/zips.svg");
+			background-color: white;
+		}
+	}
+	a[href$=".pdf"],
+	a[href$=".ppt"],
+	a[href$=".pptx"],
+	a[href$=".doc"],
+	a[href$=".docx"],
+	a[href$=".zip"],
+	 {
+		//background-size: contain;
+		//background-color: #f2f2f2;
+		background-repeat: no-repeat;
+		background-position: left 5px center;
+		background-size: auto 50px;
+		transition: background-color 300ms ease;
+		&:hover {
+			//background-color: black;
+			color: #2199e8;
+		}
+	}
+*/
+}
+
+
+/*-------------------------------------------------------------------------------------------*/
+/* REVEAL: COMPONENT   */
+/*-------------------------------------------------------------------------------------------*/
+.component-header-wrapper {
+	border-bottom: 6px double $lightgray;
+	margin-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	text-align: center;
+	.component-header {
+		padding-top: 20px;
+		h1 {
+			color: $green;
+			font-size: 2.375rem;
+			line-height: 1.3;
+			margin-bottom: 20px;
+		}
+		.component-description p {
+			font-family: $font-stack-light;
+			font-size: 1.5rem;
+			line-height: 1.3 !important;
+		}
+	}
+}
+
+.column-align {
+	text-align: center;
+}
+.component-wrapper {
+//   margin-bottom: 30px;
+  .column-content h2 {
+    border: none;
+    padding-top: 0;
+    border-bottom: 6px solid $lightgray;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    //font-family: $font-stack-note-bold;
+    font-size: 2.375rem;
+  }
+}
+
+@include breakpoint(small only) {
+	.component-header-wrapper {
+		border-bottom: none;
+		h1 {
+			font-size: 2.6;
+		}
+	}
+	.component-wrapper {
+		.columns {
+			h2 {
+			font-size: 1.875rem;
+			//border: none;
+			padding-top: 0;
+			}
+			img {
+				width: 80%;
+			}
+		}
+	}
+}
+
+.sidebar-container {
+	background-color: rgba(255, 208, 105, 0.8);
+	//padding: 20px;
+	h1, h2, h3, h4, h5 {
+		color: black;
+		margin-top: 20px;
+		font-family: $font-stack-bold;
+	}
+	.sidebar-callout {
+		//background: red;
+		margin-bottom: 40px;
+		p {
+			color: #000;
+		}
+	}
+}
+
+.component-container {
+	border-bottom: 10px dotted red;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+	.sidebar {
+		//background-color: rgba(255, 208, 105, 0.8);
+		text-align: center;
+		color: white;
+		//background-color: gray;
+		margin-top: 40px;
+		.no-link {
+			background-color: $green;
+		}
+		a {
+			display: block;
+			background-color: $green;
+			transition: background-color 300ms ease-out;
+			&:hover {
+				background-color: $blue;
+			}
+		}
+		a, .no-link {
+			border-radius: 5px;
+			padding: 20px;
+			color: white;
+			margin-bottom: 30px;
+		}
+		img {
+			margin-bottom: 20px;
+		}
+		img[src$=".svg"] {
+			//max-width: 50%;
+			height: auto !important;
+			width: 160px !important;
+		}
+		h3 {
+			//font-family: $font-stack-note-bold;
+			font-size: 1.5rem;
+		}
+		p {
+			font-family: $font-stack;
+			font-size: 1rem;
+			line-height: 1.4;
+		}
+		h3, p {
+			margin-bottom: 0;
+			margin-top: .5rem;
+		}
+	}
+}
+
+@include breakpoint(medium down) {
+	.component-header-wrapper {
+		text-align: left;
+		.component-header {
+			.component-description {
+				p {
+					font-size: 1.25rem;
+				}
+			}
+		}
+	}
+	.component-container {
+		.sidebar {
+			h3 {
+				font-size: 2rem;
+				//color: purple;
+			}
+		}
+	}
+}
+
+@include breakpoint(small only) {
+	.component-header-wrapper {
+		text-align: center;
+		}
+	}
+	.component-container {
+		.sidebar {
+			margin-top: 0;
+		}
+	}
+
+/*-------------------------------------------------------------------------------------------*/
+/* REVEAL: SCENARIO   */
+/*-------------------------------------------------------------------------------------------*/
+
+.scenario-group {
+	//background-color: pink;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.scenario-items {
+	margin-bottom: 20px;
+}
+
+.scenario-header {
+	table,tbody,tr,td {
+		padding: 0;
+		margin: 0;
+		border: 0;
+	}
+	table {
+		min-height: 250px;
+		height: 250px;
+		margin-bottom: 20px;
+	}
+	//background-color: $green;
+	color: white;
+	text-align: center;
+	h1 {
+		font-size: 2.375rem;
+		background-color: $green;
+		padding: 20px 20px 20px 120px;
+		border-radius: 5px;
+		margin-left: 80px;
+	}
+	img {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		height: 250px;
+		margin-top: -125px; /* Half the height */
+		margin-left: -15px; /* Half the width */
+	}
+
+	td {
+		position: relative;
+		vertical-align: middle;
+	}
+}
+
+
+@include breakpoint(medium down) {
+	.scenario-header {
+		h1 {
+			font-size: 1.65rem;
+			//background-color: red;
+			padding: 20px 20px 20px 120px;
+			border-radius: 5px;
+			margin-left: 80px;
+		}
+	}
+}
+@include breakpoint(small only) {
+	.scenario-header {
+		table,tbody,tr,td {
+			padding: 0;
+			margin: 0;
+			border: 0;
+		}
+		table {
+			min-height: 250px;
+			margin-bottom: 20px;
+		}
+		//background-color: $green;
+		color: white;
+		text-align: center;
+		h1 {
+			font-size: 1.65rem;
+			//background-color: green;
+			padding: 20px;
+			margin: 20px 0;
+		}
+		img {
+			height: auto;
+			width: 350px;
+			position:relative;
+			margin: 0 auto;
+		}
+
+		td {
+			position: relative;
+			vertical-align: middle;
+		}
+	}
+}
+// Small Screen - Mobile Media Query
+// Controls different spacing for mobile menu item
+/*
+@media only screen and (max-width: 32em) {
+	.overlay {
+		ul {
+			li {
+				height: calc(100% / 5);
+			}
+		}
+	}
+}
+*/
+
+
+
+
+
+/*
+svg {
+    //stroke: blue;
+    fill:blue;
+    &:hover {
+	    fill: red;
+    }
+}
+*/
+
+
+svg #icon-eyepreso {
+	path[data-name="outer"] {
+		fill: red;
+	}
+}
+
+svg:hover {
+		fill: blue;
+}
+
+
+// Custom ACF Table plugin
+// Plugin: advanced-custom-fields-table-field
+
+table.acf-table {
+	thead {
+		background: red !important;
+	}
+	tr {
+		td:nth-child(odd) {
+			background: green;
+			width: 25% !important;
+		}
+	}
+}
+li.font-awesome {
+	font-size: 2rem;
+	line-height: 1;
+	background: rgba(123, 213, 246, 0.98);
+	i.fa {
+		background: red;
+		//font-size: 3rem;
+		color: blue;
+		&:hover {
+			color: green;
+		}
+	}
+}
+
+
+
+.highlight {
+	display: block;
+	margin-bottom: 40px;
+	background: #fff6cb;
+}
+
+.page-link-module {
+	.column,
+	.columns {
+		background-color: fuchsia;
+	}
+	a.button-reveal {
+		height: 100%;
+		display: block;
+	}
+}
+
+.add-border{
+  border: dashed 1px #000000;
+}
+
+.header-featured-image {
+	text-align: center;
+	img {
+		width: 100%;
+		//max-width: 1200px;
+		height: auto;
+	}
+}
+.featured-header:first-of-type {
+	// Comment out to position flexslider on top of navigation.
+	// Uncomment places container under main menu
+	//margin-top: -$nav-height;
+}
+
+.gallery-container {
+	margin-top: 40px;
+}
+
+.thumbslist {
+	text-align: center;
+	.list {
+		display: inline-block;
+		width: 200px;
+	}
+}
+
+.buttonTest {
+	background: red;
+	display: inline-block;
+	height: 300px;
+	width: 300px;
+}
+.header-none {
+	.gallery-container {
+		//text-align: left;
+		.gallery-section {
+			width: 100%;
+			.vimeo-youtube-video-gallery {
+				//display: block;
+				//width: 100%;
+				//height: 100%;
+				//background: $lightgray;
+					a {
+						//display: inline-block;
+						//width: 200px;
+						//height: auto;
+					}
+			}
+		}
+	}
+}
+
+.content-wrapper {
+	//background-color: rgba(255, 234, 0, 0.94);
+}
+
+
+
+
+
+
+ul.rrssb-buttons li a {
+	width: 100%;
+	max-width: 200px;
+	font-size: 0.85rem;
+	font-family: $font-stack-bold;
+	font-weight: normal;
+}
+
+
+.module-section .table-overlay.null {
+	padding-left: 0.9375rem;
+	padding-right: 0.9375rem;
+}
+.columns.overlay-wrapper {
+	// Padding removed to allow for full color overlay
+	padding: 0;
+	.overlay-container {
+		// Padding is added to match F6 default styles
+		//padding-left: 0.9375rem;
+		//padding-right: 0.9375rem;
+	}
+}
+
+
+.overlay-wrapper {
+	table {
+		margin-bottom: 0;
+		tbody {
+			background-color:transparent;
+			border: none;
+		}
+		td {
+			//vertical-align: middle;
+			padding-left: 0.9375rem;
+			padding-right: 0.9375rem;
+		}
+	}
+}
+
+
+.content-height {
+	height: 100%;
+}
+
+
+table {
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+}
+/*
+.col-table {
+	display: table;
+	.col-table-row {
+		display: table-row;
+		.col-table-cell {
+			display: table-cell;
+		}
+	}
+}
+*/
+
+
+/* Button style for reveal lightbox component */
+.reveal-content {
+	.button {
+		margin-right: 5px;
+		&:last-of-type {
+			//background: red;
+			margin-right: 0;
+		}
+	}
+}
+
+
+
+
+.footer-bg {
+	background: pink !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Tutorial Name: Modernize Your Site: Building a YouTube Video Background
+Author: Samuel Dalusung
+*/
+
+
+/* GENERAL STYLES
+================================================== */
+
+/*
+.pattern {
+    background-image:url('../images/pattern.png');
+    background-repeat: repeat;
+    background-attachment:scroll;
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0
+}
+
+.divider {
+    background-image:url(../images/divider.png);
+    display:block;
+    width:300px;
+    height:35px;
+    margin:10px auto
+}
+
+
+#colorize {
+    color:#f1c40f;
+    font-family:'Lato',sans-serif;
+    font-size:40px
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.youtube-video-wrapper {
+	position: relative;
+	top: 0;
+	table {
+		//position: absolute;
+		//top:0;
+		z-index: 100;
+		background: transparent;
+		border: none;
+		color: white;
+		//margin: 60px auto;
+		margin: 0;
+		//height: 300px;
+		height: 100%;
+		//text-align: center;
+		//background-color: rgba(255, 0, 0, 0.25);
+		td {
+			vertical-align: middle;
+			padding: 60px 0 !important;
+			//background: red;
+		}
+	}
+	tbody {
+		background: transparent;
+		border: none;
+	}
+}
+
+.video-pattern {
+	background-image:url('../images/pattern.png');
+	background-repeat: repeat;
+    background-attachment:scroll;
+}
+
+
+
+/*
+.cover {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  position: absolute;
+  margin: 0 auto;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 50%;
+  text-align: center;
+}
+*/
+
+/* This is the SCSS you'll need */
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  //margin: rem-calc(0 0 54.5);
+  //min-height: 31.25rem;
+  //height: 500px;
+  overflow: hidden;
+}
+
+.video-overlay {
+	height: 100%;
+	width: 100%;
+	//opacity: .8;
+	position: absolute;
+	z-index: 2;
+}
+
+/*
+.video-expand {
+  color: white;
+  font-size: 1.125rem;
+  line-height: 1em;
+  opacity: .4;
+  position: absolute;
+  top: 0.9375rem;
+  right: 0.9375rem;
+  z-index: 3;
+}
+*/
+/*
+.video-expand:hover {
+  -webkit-transition: all 400ms ease-in-out;
+  -moz-transition: all 400ms ease-in-out;
+  transition: all 400ms ease-in-out;
+}
+*/
+
+.tv {
+  position: absolute;
+  top: 0;
+  //left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.tv .screen {
+  position: absolute;
+  //top: 0;
+  //right: -50% !important;
+  //bottom: 0;
+  //left: -50% !important; // Edit the js file to alt left position
+  z-index: 1;
+  margin: auto;
+  opacity: 0;
+  transition: opacity .5s;
+}
+
+@include breakpoint(large) {
+	.tv .screen {
+		right: -50% !important; // Edit the js file to alt left position
+		left: -50% !important; // Edit the js file to alt left position
+	}
+}
+.tv .screen.active {
+  opacity: 1;
+}
+
+
+
+
+
+
+.shadow {
+	  //box-shadow: 5px 5px 6px rgba(0,0,0,.2);
+	  box-shadow: 0 8px 6px -6px rgba(0,0,0,.2);
+}
+
+
+// Used for content component and wrapping <a> tag around the table
+a > table p {
+	color: $bodyColor;
+}
+
+
+// Data-Balancer Styles
+.data-balance .row .column {
+  background-color:#efefef;
+  padding:1%;
+  outline:solid 1px #808080;
+  margin-bottom:1px;
+  text-align:center;
+}
+
+
