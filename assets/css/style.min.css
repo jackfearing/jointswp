@@ -4239,7 +4239,8 @@ body.admin-bar .nav-container .top-bar {
 
 body {
   height: auto;
-  font-family: ProximaNova-Regular, Helvetica, sans-serif; }
+  font-family: ProximaNova-Regular, Helvetica, sans-serif;
+  background: red; }
   body p {
     font-size: 1rem; }
 
