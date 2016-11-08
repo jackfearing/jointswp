@@ -9,8 +9,8 @@
 		<?php the_content('<button class="tiny">' . __( 'Read more...', 'jointswp' ) . '</button>'); ?>
 	</section> <!-- end article section -->
 
-	<?php //get_template_part( 'parts/content', 'social' ); ?>
+	<?php get_template_part( 'parts/content', 'social' ); ?>
 
-	<?php //get_template_part( 'parts/nav', 'footer-tags' ); ?>
+	<?php get_template_part( 'parts/nav', 'footer-tags' ); ?>
 
 </article> <!-- end article -->
